@@ -1,0 +1,27 @@
+.gradle/
+build/
+out/
+run/
+run-data/
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+*.log
+crash-reports/
+
+# Never publish supplied third-party or Minecraft instance data.
+/libs/
+/references/
+/config/
+/logs/
+/mods/
+/resourcepacks/
+/saves/
+/shaderpacks/
+*.mrpack
+*.zip
+*.jar
+!gradle/wrapper/gradle-wrapper.jar

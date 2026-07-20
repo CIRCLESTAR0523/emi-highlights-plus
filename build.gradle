@@ -1,0 +1,76 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.1.38'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    maven { url = 'https://www.cursemaven.com' }
+    maven { url = 'https://maven.terraformersmc.com/releases/' }
+}
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+        workingDirectory project.layout.projectDirectory.dir('run').dir(name)
+        modSource project.sourceSets.main
+    }
+
+    client {}
+
+    server {
+        argument '--nogui'
+    }
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+
+    // Pinned development artifacts. CurseMaven artifacts are remapped by NeoGradle.
+    compileOnly "curse.maven:emi-${emi_project_id}:${emi_file_id}"
+    localRuntime "curse.maven:emi-${emi_project_id}:${emi_file_id}"
+
+    compileOnly "curse.maven:sophisticated-core-${sophisticated_core_project_id}:${sophisticated_core_file_id}"
+    localRuntime "curse.maven:sophisticated-core-${sophisticated_core_project_id}:${sophisticated_core_file_id}"
+
+    compileOnly "curse.maven:sophisticated-storage-${sophisticated_storage_project_id}:${sophisticated_storage_file_id}"
+    localRuntime "curse.maven:sophisticated-storage-${sophisticated_storage_project_id}:${sophisticated_storage_file_id}"
+
+    compileOnly "curse.maven:sophisticated-backpacks-${sophisticated_backpacks_project_id}:${sophisticated_backpacks_file_id}"
+    localRuntime "curse.maven:sophisticated-backpacks-${sophisticated_backpacks_project_id}:${sophisticated_backpacks_file_id}"
+}
+
+tasks.withType(ProcessResources).configureEach {
+    def replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
