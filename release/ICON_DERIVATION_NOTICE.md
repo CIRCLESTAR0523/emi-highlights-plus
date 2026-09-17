@@ -1,6 +1,6 @@
 # EMI Highlights Plus icon derivation notice
 
-The candidates `assets/emi_highlights_plus_ehplus_emi_style_candidate_400.png` and `assets/emi_highlights_plus_three_line_wordmark_candidate_400.png` were generated with AI assistance and inspired by the official EMI project icon at `xplat/src/main/resources/icon.png` in the EMI repository. The first changes the displayed characters to `EH+`. The second uses a distinct three-line `EMI` / `Highlights` / `Plus` wordmark while retaining the dark-purple pixel atmosphere and pink, green, and cyan color family. They are intended only for the unofficial EMI Highlights Plus compatibility project.
+The adopted icon `assets/emi_highlights_plus_three_line_wordmark_candidate_400.png` was generated with AI assistance and inspired by the official EMI project icon at `xplat/src/main/resources/icon.png` in the EMI repository. It uses a distinct three-line `EMI` / `Highlights` / `Plus` wordmark with a dark-purple pixel background and pink, green, and cyan colors. It is intended for the unofficial EMI Highlights Plus compatibility project.
 
 EMI source and its repository icon are distributed under the following license:
 
