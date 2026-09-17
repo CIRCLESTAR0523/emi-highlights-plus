@@ -2,14 +2,17 @@ modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
 
+[[mixins]]
+config="emi_highlights_plus.mixins.json"
+
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
 authors="CIRCLESTAR523"
 description="""
-Client-side compatibility layer that restores EMI Recipe Tree crafting-mode
-slot highlights in Sophisticated Storage and Sophisticated Backpacks screens.
+Client-side compatibility layer for EMI Recipe Tree crafting-mode highlights
+and logical inventories in custom storage screens.
 """
 
 [[dependencies.${mod_id}]]
@@ -51,5 +54,33 @@ side="CLIENT"
 modId="sophisticatedbackpacks"
 type="optional"
 versionRange="[3.25.64,)"
+ordering="AFTER"
+side="CLIENT"
+
+[[dependencies.${mod_id}]]
+modId="projectexpansion"
+type="optional"
+versionRange="[1.21.1-1.0.6,)"
+ordering="AFTER"
+side="CLIENT"
+
+[[dependencies.${mod_id}]]
+modId="projecte"
+type="optional"
+versionRange="[1.1.0,)"
+ordering="AFTER"
+side="CLIENT"
+
+[[dependencies.${mod_id}]]
+modId="ae2"
+type="optional"
+versionRange="[19.2.17,)"
+ordering="AFTER"
+side="CLIENT"
+
+[[dependencies.${mod_id}]]
+modId="refinedstorage"
+type="optional"
+versionRange="[2.0.9,)"
 ordering="AFTER"
 side="CLIENT"

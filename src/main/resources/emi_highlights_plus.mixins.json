@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.circlestar.emihighlightsplus.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "TransmutationPriorityMixin",
+    "KnowledgePriorityInvalidationMixin",
+    "AE2StorageScreenMixin",
+    "AE2RepoPriorityMixin",
+    "RefinedStorageRepositoryPriorityMixin"
+  ],
+  "injectors": { "defaultRequire": 1 }
+}

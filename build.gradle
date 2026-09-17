@@ -13,6 +13,13 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+sourceSets {
+    smoke {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+
 repositories {
     maven { url = 'https://www.cursemaven.com' }
     maven { url = 'https://maven.terraformersmc.com/releases/' }
@@ -26,7 +33,18 @@ runs {
         modSource project.sourceSets.main
     }
 
-    client {}
+    client {
+        if (project.hasProperty('prioritySmoke') || project.hasProperty('minimalRuntimeSmoke')
+                || project.hasProperty('disabledConfigSmoke')) {
+            modSource project.sourceSets.smoke
+        }
+        if (project.hasProperty('minimalRuntimeSmoke')) {
+            systemProperty 'emi_highlights_plus.smoke.mode', 'minimal-runtime'
+        }
+        if (project.hasProperty('disabledConfigSmoke')) {
+            systemProperty 'emi_highlights_plus.smoke.mode', 'disabled-config'
+        }
+    }
 
     server {
         argument '--nogui'
@@ -38,6 +56,12 @@ configurations {
 }
 
 dependencies {
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly "curse.maven:projecte-${projecte_project_id}:${projecte_file_id}"
+    testRuntimeOnly "curse.maven:applied-energistics-2-${ae2_project_id}:${ae2_file_id}"
+    testRuntimeOnly "curse.maven:refined-storage-${refined_storage_project_id}:${refined_storage_file_id}"
     implementation "net.neoforged:neoforge:${neo_version}"
 
     // Pinned development artifacts. CurseMaven artifacts are remapped by NeoGradle.
@@ -45,13 +69,24 @@ dependencies {
     localRuntime "curse.maven:emi-${emi_project_id}:${emi_file_id}"
 
     compileOnly "curse.maven:sophisticated-core-${sophisticated_core_project_id}:${sophisticated_core_file_id}"
-    localRuntime "curse.maven:sophisticated-core-${sophisticated_core_project_id}:${sophisticated_core_file_id}"
-
     compileOnly "curse.maven:sophisticated-storage-${sophisticated_storage_project_id}:${sophisticated_storage_file_id}"
-    localRuntime "curse.maven:sophisticated-storage-${sophisticated_storage_project_id}:${sophisticated_storage_file_id}"
-
     compileOnly "curse.maven:sophisticated-backpacks-${sophisticated_backpacks_project_id}:${sophisticated_backpacks_file_id}"
-    localRuntime "curse.maven:sophisticated-backpacks-${sophisticated_backpacks_project_id}:${sophisticated_backpacks_file_id}"
+    compileOnly "curse.maven:projecte-${projecte_project_id}:${projecte_file_id}"
+    compileOnly "curse.maven:project-expansion-${project_expansion_project_id}:${project_expansion_file_id}"
+
+    // The opt-in smoke run deliberately leaves every optional integration out.
+    // Normal development runs retain the complete pinned compatibility set.
+    if (!project.hasProperty('minimalRuntimeSmoke')) {
+        localRuntime "curse.maven:sophisticated-core-${sophisticated_core_project_id}:${sophisticated_core_file_id}"
+        localRuntime "curse.maven:sophisticated-storage-${sophisticated_storage_project_id}:${sophisticated_storage_file_id}"
+        localRuntime "curse.maven:sophisticated-backpacks-${sophisticated_backpacks_project_id}:${sophisticated_backpacks_file_id}"
+        localRuntime "curse.maven:projecte-${projecte_project_id}:${projecte_file_id}"
+        localRuntime "curse.maven:project-expansion-${project_expansion_project_id}:${project_expansion_file_id}"
+    }
+
+    compileOnly "curse.maven:applied-energistics-2-${ae2_project_id}:${ae2_file_id}"
+    compileOnly "curse.maven:refined-storage-${refined_storage_project_id}:${refined_storage_file_id}"
+    compileOnly 'org.apiguardian:apiguardian-api:1.1.2'
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -73,4 +108,20 @@ tasks.withType(ProcessResources).configureEach {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+def testClassesJar = tasks.register('testClassesJar', Jar) {
+    archiveClassifier = 'test-classes'
+    destinationDirectory = layout.dir(provider {
+        new File(gradle.gradleUserHomeDir, 'emi-container-highlights/test-classes')
+    })
+    from sourceSets.main.output
+    from sourceSets.test.output
+}
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
+    dependsOn testClassesJar
+    // Individual class-directory loading fails on this OneDrive workspace; use a test-only archive.
+    classpath = files(testClassesJar.flatMap { it.archiveFile }) + sourceSets.test.runtimeClasspath
 }

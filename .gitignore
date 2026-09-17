@@ -25,3 +25,19 @@ crash-reports/
 *.zip
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
+
+# Local management and diagnostic material (not part of published source).
+/MINECRAFT_MOD_PROJECT.md
+/EXPERIMENT_LOG.md
+/REASONING_LEVEL_LOG.md
+/C3_*.md
+/MANAGEMENT_RETURN_*.md
+/PUBLICATION_APPROVAL_*.md
+/PUBLICATION_RESULT_*.md
+/PRIORITY_IMPLEMENTATION_RESULT.md
+/REQUIRED_AMOUNT_WITHDRAWAL_DESIGN.md
+/REQUIRED_MATERIAL_PRIORITY_DESIGN.md
+/src/smoke/
+/release/PUBLICATION_ASSET_REGISTER_*.md
+/release/assets/*
+!/release/assets/emi_highlights_plus_three_line_wordmark_candidate_400.png
