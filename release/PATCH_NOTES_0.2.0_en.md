@@ -1,7 +1,7 @@
 # EMI Highlights Plus 0.2.0 Patch Notes
 
 - Release type: Stable
-- Release date: Not published
+- GitHub release date: 2026-09-21
 - Previous version: 0.1.0 (source history under the old Mod ID)
 - Supported Minecraft: 1.21.1
 - Supported loader: NeoForge 21.1.234 or later

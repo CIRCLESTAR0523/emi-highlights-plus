@@ -1,7 +1,7 @@
 # EMI Highlights Plus 0.2.0 パッチノート
 
 - リリース種別：Stable
-- 公開日：未公開
+- GitHub公開日：2026-09-21
 - 前version：0.1.0（旧Mod IDのソース履歴）
 - 対応Minecraft：1.21.1
 - 対応Loader：NeoForge 21.1.234以降

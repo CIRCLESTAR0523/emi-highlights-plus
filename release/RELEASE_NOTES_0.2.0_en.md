@@ -1,7 +1,7 @@
 # EMI Highlights Plus 0.2.0 Release Notes
 
 - Release type: Stable
-- Release date: Not published
+- GitHub release date: 2026-09-21
 - Previous version: 0.1.0 (source history under the old Mod ID)
 
 ## Overview

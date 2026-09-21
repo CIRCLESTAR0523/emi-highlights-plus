@@ -1,7 +1,7 @@
 # EMI Highlights Plus 0.2.0 リリースノート
 
 - リリース種別：Stable
-- 公開日：未公開
+- GitHub公開日：2026-09-21
 - 前version：0.1.0（旧Mod IDのソース履歴）
 
 ## 概要
