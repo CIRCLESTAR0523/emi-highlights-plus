@@ -50,6 +50,7 @@ public final class ClientHighlightHandler {
         for (HighlightTarget target : visibleTargets) {
             if (snapshot.wasSuppressedByEmi(target.slot()) && snapshot.isRequired(target.stack())) {
                 renderer.render(event.getGuiGraphics(), target);
+                renderer.renderDecorations(event.getGuiGraphics(), target);
                 highlighted++;
             }
         }

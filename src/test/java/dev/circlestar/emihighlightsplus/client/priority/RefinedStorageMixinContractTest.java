@@ -29,6 +29,16 @@ class RefinedStorageMixinContractTest {
                 && method.desc.equals("()Lcom/refinedmods/refinedstorage/api/resource/repository/ResourceRepository;")));
     }
 
+    @Test void gridHighlightRenderContractStillExists() throws IOException {
+        var screen = read("com/refinedmods/refinedstorage/common/grid/screen/AbstractGridScreen");
+        assertTrue(screen.methods.stream().anyMatch(method -> method.name.equals("renderResourceWithAmount")
+                && method.desc.equals("(Lnet/minecraft/client/gui/GuiGraphics;IILcom/refinedmods/refinedstorage/common/api/grid/view/GridResource;)V")));
+        assertTrue(screen.methods.stream().anyMatch(method -> method.name.equals("renderSlotBackground")
+                && method.desc.equals("(Lnet/minecraft/client/gui/GuiGraphics;IIZI)V")));
+        assertTrue(screen.methods.stream().anyMatch(method -> method.name.equals("renderAmount")
+                && method.desc.equals("(Lnet/minecraft/client/gui/GuiGraphics;IILcom/refinedmods/refinedstorage/common/api/grid/view/GridResource;)V")));
+    }
+
     private static ClassNode read(String name) throws IOException {
         try (var input = RefinedStorageMixinContractTest.class.getClassLoader().getResourceAsStream(name + ".class")) {
             assertNotNull(input, "Pinned test dependency missing: " + name);

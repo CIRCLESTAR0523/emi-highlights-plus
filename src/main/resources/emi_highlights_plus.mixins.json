@@ -8,6 +8,7 @@
     "KnowledgePriorityInvalidationMixin",
     "AE2StorageScreenMixin",
     "AE2RepoPriorityMixin",
+    "RefinedStorageGridHighlightMixin",
     "RefinedStorageRepositoryPriorityMixin"
   ],
   "injectors": { "defaultRequire": 1 }

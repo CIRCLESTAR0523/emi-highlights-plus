@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-09-24
+
+### Fixed
+
+- Added the missing EMI Crafting Mode highlight overlay to Refined Storage Grid and Wireless Grid resources.
+- Standardized required-material layering across supported screens so the translucent cyan overlay is drawn over the item while counts and terminal symbols remain readable above it.
+- Prevented native container overlays from tinting stack counts by redrawing the appropriate item or terminal decorations in the top layer.
+
+### Verified
+
+- Refined Storage Crafting Grid and Wireless Grid required-item ordering, overlay, and count layering.
+- AE2 terminals, ProjectE and Project Expansion transmutation screens, and Sophisticated Storage and Backpacks overlay layering.
+- Reproducible build, 22 automated tests, optional-integration bytecode contracts, and artifact-content audit.
+
+## [0.2.0] - 2026-09-17
+
 ### Changed
 
 - Renamed the current development artifact from EMI Container Highlights to EMI Highlights+.

@@ -11,7 +11,12 @@ final class SophisticatedStorageClientCompat {
     private SophisticatedStorageClientCompat() {
     }
 
-    static void initialize(boolean storageLoaded, boolean backpacksLoaded) {
+    static void initialize(
+            boolean storageLoaded,
+            boolean backpacksLoaded,
+            RequiredIngredientProvider ingredientProvider,
+            HighlightRenderer renderer
+    ) {
         AdapterRegistry adapters = new AdapterRegistry();
         if (storageLoaded) {
             adapters.register(new SophisticatedStorageAdapter());
@@ -23,9 +28,9 @@ final class SophisticatedStorageClientCompat {
         }
 
         ClientHighlightHandler handler = new ClientHighlightHandler(
-                new EmiRequiredIngredientProvider(),
+                ingredientProvider,
                 adapters,
-                new HighlightRenderer()
+                renderer
         );
         NeoForge.EVENT_BUS.addListener(handler::onContainerForeground);
     }

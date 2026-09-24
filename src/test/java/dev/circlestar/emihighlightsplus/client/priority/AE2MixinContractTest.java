@@ -38,6 +38,20 @@ class AE2MixinContractTest {
                 && field.desc.equals("Lappeng/client/gui/me/common/Repo;")));
     }
 
+    @Test void terminalDecorationContractStillExists() throws IOException {
+        var screen = read("appeng/client/gui/me/common/MEStorageScreen");
+        assertTrue(screen.methods.stream().anyMatch(method -> method.name.equals("isViewOnlyCraftable")
+                && method.desc.equals("()Z")));
+
+        var slot = read("appeng/client/gui/me/common/RepoSlot");
+        assertTrue(slot.methods.stream().anyMatch(method -> method.name.equals("getEntry")
+                && method.desc.equals("()Lappeng/menu/me/common/GridInventoryEntry;")));
+
+        var sizeRenderer = read("appeng/client/gui/me/common/StackSizeRenderer");
+        assertTrue(sizeRenderer.methods.stream().anyMatch(method -> method.name.equals("renderSizeLabel")
+                && method.desc.equals("(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;FFLjava/lang/String;Z)V")));
+    }
+
     private static ClassNode read(String name) throws IOException {
         try (var input = AE2MixinContractTest.class.getClassLoader().getResourceAsStream(name + ".class")) {
             assertNotNull(input, "Pinned test dependency missing: " + name);

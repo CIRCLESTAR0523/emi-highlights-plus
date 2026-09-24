@@ -2,7 +2,7 @@
 
 ![EMI Highlights Plus](release/assets/emi_highlights_plus_three_line_wordmark_candidate_400.png)
 
-[English overview](release/PROJECT_PAGE_en.md) · [日本語の紹介](release/PROJECT_PAGE_ja.md) · [Release notes](release/RELEASE_NOTES_0.2.0_en.md) · [リリースノート](release/RELEASE_NOTES_0.2.0_ja.md)
+[English overview](release/PROJECT_PAGE_en.md) · [日本語の紹介](release/PROJECT_PAGE_ja.md) · [Release notes](release/RELEASE_NOTES_0.2.1_en.md) · [リリースノート](release/RELEASE_NOTES_0.2.1_ja.md)
 
 EMI Recipe Tree / Crafting Modeの必要素材ハイライトと材料在庫判定を、独自の収納画面へ補完するクライアント用NeoForge Modです。
 
@@ -19,14 +19,14 @@ EMI Recipe Tree / Crafting Modeの必要素材ハイライトと材料在庫判�
 - ProjectE PE1.1.0以降（Transmutation Table / Tabletの優先表示）
 - Project Expansion 1.21.1-1.0.6以降（Arcane Transmutation Tablet）
 - Applied Energistics 2 19.2.17以降（収納Terminalの優先表示）
-- Refined Storage 2.0.9以降（Gridの優先表示、実機未確認）
+- Refined Storage 2.0.9以降（Grid／Wireless Gridの優先表示・水色ハイライト）
 
 任意連携先は必須依存ではありません。導入されている対応先だけが有効になります。
 
 ## 導入
 
 1. EMIと、使用する対応先Modを導入します。
-2. `emi_highlights_plus-0.2.0.jar`をMinecraftの`mods`フォルダーへ入れます。
+2. `emi_highlights_plus-0.2.1.jar`をMinecraftの`mods`フォルダーへ入れます。
 3. 旧Mod IDの`emi_container_highlights-*.jar`または旧名の`emi_container_highlight_compat-*.jar`がある場合は、二重ロードを避けるため取り除きます。
 
 ## 設定
@@ -49,7 +49,7 @@ Arcane Transmutation Tabletでは、現在表示中の16枠を材料数へ加え
 
 ProjectE本体とArcane Tabletの必要素材優先表示では、必要素材同士とその他同士の元のEMC順を維持します。検索、燃料枠、ロック枠は変更せず、必要素材の種類や表示ON/OFFが変わった時だけ最初のページへ戻します。数量だけの変更ではページを戻しません。
 
-AE2とRSでは検索・表示フィルターを通過した通常一覧だけを必要素材優先にし、必要素材内とその他内では各Modで選択中のソートを維持します。AE2の固定行は並べ替えず、必要素材の種類が変わった時だけ一覧を更新します。AE2は実機確認済み、RSはGrid未準備のため自動検証のみです。
+AE2とRSでは検索・表示フィルターを通過した通常一覧だけを必要素材優先にし、必要素材内とその他内では各Modで選択中のソートを維持します。AE2の固定行は並べ替えず、必要素材の種類が変わった時だけ一覧を更新します。AE2 Terminal／Wireless TerminalとRS Grid／Wireless Gridは実機確認済みです。
 
 Refined Storageの対応は実験的です。問題があれば`refinedStorageEnabled=false`で無効にできます。
 

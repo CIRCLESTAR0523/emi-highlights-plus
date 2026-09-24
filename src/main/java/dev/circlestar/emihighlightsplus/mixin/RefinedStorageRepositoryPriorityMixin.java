@@ -36,6 +36,11 @@ abstract class RefinedStorageRepositoryPriorityMixin implements RefinedStoragePr
         }
     }
 
+    @Override
+    public boolean ech$isRequiredItem(ItemResource resource) {
+        return ech$required.contains(resource);
+    }
+
     @Inject(method = "setSort", at = @At("TAIL"), remap = false)
     private void ech$wrapChangedSort(Comparator<Object> comparator, SortingDirection direction, CallbackInfo ci) {
         ech$wrapped = false;
@@ -55,6 +60,6 @@ abstract class RefinedStorageRepositoryPriorityMixin implements RefinedStoragePr
     @Unique
     private boolean ech$isRequired(Object candidate) {
         return candidate instanceof ItemGridResource item
-                && ech$required.contains(item.getItemResource());
+                && ech$isRequiredItem(item.getItemResource());
     }
 }
